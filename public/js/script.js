@@ -275,6 +275,10 @@ function toggleCart() {
     document.body.style.overflow = cartSidebar.classList.contains('open') ? 'hidden' : 'auto';
 }
 
+function login(){
+    window.location.href = "login.html";
+}
+
 // Animación al agregar al carrito
 function showAddToCartAnimation() {
     const cartBtn = document.querySelector('.cart-btn');
