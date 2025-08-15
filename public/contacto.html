@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Pikatas Restaurant</title>
+    <link rel="stylesheet" href="css/contacto.css">
+    <link rel="shortcut icon" href="img/PIKATAS_LOGO-removebg-preview.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Encabezado -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <img src="./img/PIKATAS_LOGO.png" alt="logo" style="width: 150px;">
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="#" class="nav-link">Hamburguesa</a></li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link dropdown-toggle">Menú <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Hamburguesas</a></li>
+                        <li><a href="#">Arepas</a></li>
+                        <li><a href="#">Bebidas</a></li>
+                        <li><a href="#">Postres</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="nav-link">Sobre Nosotros</a></li>
+                <li><a href="contacto.html" class="nav-link active">Contacto</a></li>
+            </ul>
+            <div class="nav-icons">
+                <i class="fas fa-user"></i>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sección Principal -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Contáctanos</h1>
+                <p class="hero-subtitle">Estamos aquí para servirte la mejor comida venezolana</p>
+            </div>
+        </div>
+        <div class="hero-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Formulario de Contacto -->
+                <div class="contact-form-container">
+                    <h2>Envíanos un Mensaje</h2>
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nombre Completo</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Asunto</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Selecciona un asunto</option>
+                                <option value="reserva">Reserva</option>
+                                <option value="pedido">Pedido Especial</option>
+                                <option value="evento">Evento Privado</option>
+                                <option value="sugerencia">Sugerencia</option>
+                                <option value="queja">Queja</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <span>Enviar Mensaje</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Información de Contacto -->
+                <div class="contact-info">
+                    <h2>Información de Contacto</h2>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Dirección</h3>
+                            <p>Av. Principal, Centro Comercial Plaza Venezuela<br>Caracas, Venezuela</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Teléfono</h3>
+                            <p>+58 212 555-0123<br>+58 414 555-0456</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Email</h3>
+                            <p>info@pikatasrestaurant.com<br>pedidos@pikatasrestaurant.com</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Horarios</h3>
+                            <p>Lun - Dom: 11:00 AM - 11:00 PM<br>Delivery hasta las 10:30 PM</p>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <h3>Síguenos</h3>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección del Mapa -->
+    <section class="map-section">
+        <div class="container">
+            <h2>Nuestra Ubicación</h2>
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <p>Mapa Interactivo</p>
+                    <small>Av. Principal, Centro Comercial Plaza Venezuela, Caracas</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de Página -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-logo">Pikatas</h3>
+                    <p>Auténtica comida venezolana con el mejor sabor y calidad.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="#">Menú</a></li>
+                        <li><a href="#">Sobre Nosotros</a></li>
+                        <li><a href="contact.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-phone"></i> +0000000000000</p>
+                    <p><i class="fas fa-envelope"></i> info@pikatasrestaurant.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Pikatas Restaurant. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="contact-script.js"></script>
+</body>
+</html>

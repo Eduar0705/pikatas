@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pikatas - Restaurante de Comida Rápida</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="./img/PIKATAS_LOGO-removebg-preview.png" type="image/x-icon">
+</head>
+<body>
+    <!-- Encabezado -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <img src="./img/PIKATAS_LOGO.png" alt="logo" style="width: 150px;">
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link active">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#burger" class="nav-link">Hamburguesas</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#menu" class="nav-link">Menú <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#burgers">Hamburguesas</a>
+                        <a href="#sides">Acompañantes</a>
+                        <a href="#drinks">Bebidas</a>
+                        <a href="#desserts">Postres</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">Sobre Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contacto.html" class="nav-link">Contacto</a>
+                </li>
+            </ul>
+            
+            <div class="nav-icons">
+                <button class="icon-btn">
+                    <i class="fas fa-user"></i>
+                </button>
+                <button class="icon-btn cart-btn" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sección Principal -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2 class="hero-title">
+                    Súper Deliciosa<br>
+                    <span class="highlight">Hamburguesa</span>
+                </h2>
+                <p class="hero-description">
+                    ¡Ven y prueba una nueva experiencia con una rica comida venezolana!
+                </p>
+                <div class="hero-actions">
+                    <button class="order-btn" onclick="scrollToMenu()">Ordenar Ahora</button>
+                    <span class="price">$10.50</span>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="./img/burger.png" alt="Súper Deliciosa Hamburguesa" class="burger-img">
+            </div>
+        </div>
+        <div class="hero-bg-shapes">
+            <div class="shape-1"></div>
+            <div class="shape-2"></div>
+        </div>
+    </section>
+
+    <!-- Sección Menú -->
+    <section class="menu-section" id="menu">
+        <div class="container">
+            <h2 class="section-title">Nuestro <span class="highlight">Menú</span></h2>
+            
+            <div class="menu-categories">
+                <button class="category-btn active" data-category="all">Todos</button>
+                <button class="category-btn" data-category="burgers">Hamburguesas</button>
+                <button class="category-btn" data-category="sides">Acompañantes</button>
+                <button class="category-btn" data-category="drinks">Bebidas</button>
+            </div>
+            
+            <div class="menu-grid" id="menuGrid">
+                <!-- Los productos del menú serán agregados por JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrito Lateral -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Tu Pedido</h3>
+            <button class="close-cart" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Los productos del carrito serán agregados por JavaScript -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: $<span id="cartTotal">0.00</span></strong>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">
+                <i class="fas fa-credit-card"></i>
+                Proceder al Pago
+            </button>
+        </div>
+    </div>
+
+    <!-- Fondo Oscuro del Carrito -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+    <!-- Pie de Página -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="logo">Pikatas</h3>
+                    <p>La mejor comida rápida venezolana en la ciudad. Sabores auténticos que te transportarán.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="#home">Inicio</a></li>
+                        <li><a href="#menu">Menú</a></li>
+                        <li><a href="#about">Nosotros</a></li>
+                        <li><a href="#contact">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-phone"></i> +00000000000000</p>
+                    <p><i class="fas fa-envelope"></i> info@pikatasrestaurant.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> xxxxxxxxxx</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Pikatas Restaurant. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
