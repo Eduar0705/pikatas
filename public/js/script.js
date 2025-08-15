@@ -5,7 +5,7 @@ const menuItems = [
         description: "Hamburguesa con carne jugosa, lechuga, tomate, cebolla y nuestra salsa especial",
         price: 10.50,
         category: "burgers",
-        image: "/placeholder.svg?height=200&width=300"
+        image: "img/b1.png"
     },
     {
         id: 2,
@@ -13,7 +13,7 @@ const menuItems = [
         description: "Fusión venezolana: hamburguesa servida en arepa con queso y aguacate",
         price: 12.00,
         category: "burgers",
-        image: "/placeholder.svg?height=200&width=300"
+        image: "img/b2.png"
     },
     {
         id: 3,
@@ -21,7 +21,7 @@ const menuItems = [
         description: "Pan francés con carne mechada, queso amarillo, aguacate y salsas",
         price: 9.50,
         category: "burgers",
-        image: "/placeholder.svg?height=200&width=300"
+        image: "img/b3.png"
     },
     {
         id: 4,
@@ -29,7 +29,7 @@ const menuItems = [
         description: "Plátano verde frito con queso rallado y hogao",
         price: 6.00,
         category: "sides",
-        image: "/placeholder.svg?height=200&width=300"
+        image: "img/b4.png"
     },
     {
         id: 5,
@@ -37,7 +37,7 @@ const menuItems = [
         description: "Yuca dorada y crujiente con ajo y cilantro",
         price: 5.50,
         category: "sides",
-        image: "/placeholder.svg?height=200&width=300"
+        image: "img/b5.png"
     },
     {
         id: 6,
@@ -45,7 +45,7 @@ const menuItems = [
         description: "Palitos de queso envueltos en masa y fritos hasta dorar",
         price: 8.00,
         category: "sides",
-        image: "/placeholder.svg?height=200&width=300"
+        image: "img/b6.png"
     },
     {
         id: 7,
@@ -53,15 +53,7 @@ const menuItems = [
         description: "Bebida tradicional venezolana cremosa y refrescante",
         price: 4.00,
         category: "drinks",
-        image: "/placeholder.svg?height=200&width=300"
-    },
-    {
-        id: 8,
-        name: "Malta Polar",
-        description: "Bebida malteada venezolana, perfecta para acompañar",
-        price: 3.50,
-        category: "drinks",
-        image: "/placeholder.svg?height=200&width=300"
+        image: "img/b7.png"
     },
     {
         id: 9,
@@ -69,7 +61,40 @@ const menuItems = [
         description: "Jugos frescos de frutas tropicales: mango, parchita, guayaba",
         price: 4.50,
         category: "drinks",
-        image: "/placeholder.svg?height=200&width=300"
+        image: "img/jugofrut.png"
+    },
+    {
+        id: 10,
+        name: "Pollo a la Parrilla",
+        description: "Jugoso pollo asado con especias tradicionales",
+        price: 11.00,
+        category: "chicken",
+        image: "img/topcard3.png" 
+    },
+    {
+        id: 11,
+        name: "Alitas Picantes",
+        description: "Alitas de pollo bañadas en nuestra salsa picante especial",
+        price: 9.00,
+        category: "chicken",
+        image: "img/p2.png"
+    },
+    // Nuevos items de pizza
+    {
+        id: 12,
+        name: "Pizza Hawaiana",
+        description: "Clásica pizza con piña, jamón y queso mozzarella",
+        price: 14.00,
+        category: "pizza",
+        image: "img/topcard2.png"
+    },
+    {
+        id: 13,
+        name: "Pizza Especial",
+        description: "Pizza con pepperoni, champiñones, pimientos y queso",
+        price: 15.50,
+        category: "pizza",
+        image: "img/p1.png"
     }
 ];
 

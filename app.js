@@ -19,6 +19,8 @@ app.use(session({
     }
 }));
 
+// RUTAS
+app.use(require('./routers/enviaInfo.js'));
 
 // PUERTO DEL SERVIDOR
 const PORT = process.env.PORT || 3009;
