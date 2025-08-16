@@ -5,58 +5,42 @@ const menuItems = [
         description: "Hamburguesa con carne jugosa, lechuga, tomate, cebolla y nuestra salsa especial",
         price: 10.50,
         category: "burgers",
-        image: "img/b1.png"
+        image: "img/burger.png"
     },
     {
         id: 2,
-        name: "Arepa Burger",
-        description: "Fusión venezolana: hamburguesa servida en arepa con queso y aguacate",
-        price: 12.00,
-        category: "burgers",
-        image: "img/b2.png"
-    },
-    {
-        id: 3,
         name: "Pepito Especial",
         description: "Pan francés con carne mechada, queso amarillo, aguacate y salsas",
         price: 9.50,
         category: "burgers",
-        image: "img/b3.png"
+        image: "img/pepito.png"
     },
     {
-        id: 4,
+        id: 3,
         name: "Patacones",
         description: "Plátano verde frito con queso rallado y hogao",
         price: 6.00,
         category: "sides",
-        image: "img/b4.png"
+        image: "img/patacones.png"
     },
     {
-        id: 5,
+        id: 4,
         name: "Yuca Frita",
         description: "Yuca dorada y crujiente con ajo y cilantro",
         price: 5.50,
         category: "sides",
-        image: "img/b5.png"
+        image: "img/yuca.png"
     },
     {
-        id: 6,
+        id: 5,
         name: "Tequeños",
         description: "Palitos de queso envueltos en masa y fritos hasta dorar",
         price: 8.00,
         category: "sides",
-        image: "img/b6.png"
+        image: "img/tequeño.png"
     },
     {
-        id: 7,
-        name: "Chicha de Arroz",
-        description: "Bebida tradicional venezolana cremosa y refrescante",
-        price: 4.00,
-        category: "drinks",
-        image: "img/b7.png"
-    },
-    {
-        id: 9,
+        id: 6,
         name: "Jugo Natural",
         description: "Jugos frescos de frutas tropicales: mango, parchita, guayaba",
         price: 4.50,
@@ -64,7 +48,7 @@ const menuItems = [
         image: "img/jugofrut.png"
     },
     {
-        id: 10,
+        id: 7,
         name: "Pollo a la Parrilla",
         description: "Jugoso pollo asado con especias tradicionales",
         price: 11.00,
@@ -72,16 +56,15 @@ const menuItems = [
         image: "img/topcard3.png" 
     },
     {
-        id: 11,
+        id: 8,
         name: "Alitas Picantes",
         description: "Alitas de pollo bañadas en nuestra salsa picante especial",
         price: 9.00,
         category: "chicken",
         image: "img/p2.png"
     },
-    // Nuevos items de pizza
     {
-        id: 12,
+        id: 9,
         name: "Pizza Hawaiana",
         description: "Clásica pizza con piña, jamón y queso mozzarella",
         price: 14.00,
@@ -89,7 +72,7 @@ const menuItems = [
         image: "img/topcard2.png"
     },
     {
-        id: 13,
+        id: 10,
         name: "Pizza Especial",
         description: "Pizza con pepperoni, champiñones, pimientos y queso",
         price: 15.50,
@@ -98,6 +81,9 @@ const menuItems = [
     }
 ];
 
+function menu(){
+    window.location.href = "menu.html";
+}
 // Carrito de compras
 let cart = [];
 

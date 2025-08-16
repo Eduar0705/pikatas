@@ -22,19 +22,10 @@
                     <a href="#home" class="nav-link active">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#burger" class="nav-link">Hamburguesas</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a href="#menu" class="nav-link">Menú <i class="fas fa-chevron-down"></i></a>
-                    <div class="dropdown-content">
-                        <a href="#burgers">Hamburguesas</a>
-                        <a href="#sides">Acompañantes</a>
-                        <a href="#drinks">Bebidas</a>
-                        <a href="#desserts">Postres</a>
-                    </div>
+                    <a href="menu.html" class="nav-link">Menú</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#about" class="nav-link">Sobre Nosotros</a>
+                    <a href="sobre.html" class="nav-link">Sobre Nosotros</a>
                 </li>
                 <li class="nav-item">
                     <a href="contacto.html" class="nav-link">Contacto</a>
@@ -45,9 +36,8 @@
                 <button class="icon-btn" onclick="login()">
                     <i class="fas fa-user"></i>
                 </button>
-                <button class="icon-btn cart-btn" onclick="toggleCart()">
+                <button class="icon-btn cart-btn" onclick="menu()">
                     <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count" id="cartCount">0</span>
                 </button>
             </div>
             
@@ -71,7 +61,7 @@
                     ¡Ven y prueba una nueva experiencia con una rica comida venezolana!
                 </p>
                 <div class="hero-actions">
-                    <button class="order-btn" onclick="scrollToMenu()">Ordenar Ahora</button>
+                    <button class="order-btn" onclick="menu()">Ordenar Ahora</button>
                     <span class="price">$10.50</span>
                 </div>
             </div>
@@ -82,24 +72,6 @@
         <div class="hero-bg-shapes">
             <div class="shape-1"></div>
             <div class="shape-2"></div>
-        </div>
-    </section>
-
-    <!-- Sección Menú -->
-    <section class="menu-section" id="menu">
-        <div class="container">
-            <h2 class="section-title">Nuestro <span class="highlight">Menú</span></h2>
-            
-            <div class="menu-categories">
-                <button class="category-btn active" data-category="all">Todos</button>
-                <button class="category-btn" data-category="burgers">Hamburguesas</button>
-                <button class="category-btn" data-category="sides">Acompañantes</button>
-                <button class="category-btn" data-category="drinks">Bebidas</button>
-            </div>
-            
-            <div class="menu-grid" id="menuGrid">
-                <!-- Los productos del menú serán agregados por JavaScript -->
-            </div>
         </div>
     </section>
 
@@ -141,15 +113,14 @@
                     <ul>
                         <li><a href="index.html">Inicio</a></li>
                         <li><a href="#menu">Menú</a></li>
-                        <li><a href="#about">Nosotros</a></li>
+                        <li><a href="sobre.html">Nosotros</a></li>
                         <li><a href="contacto.html">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Contacto</h4>
-                    <p><i class="fas fa-phone"></i> +00000000000000</p>
-                    <p><i class="fas fa-envelope"></i> info@pikatasrestaurant.com</p>
-                    <p><i class="fas fa-map-marker-alt"></i> xxxxxxxxxx</p>
+                    <p><i class="fas fa-phone"></i> <a href="https://wa.me/+50685396632">+50685396632</a></p>
+                    <p><i class="fas fa-map-marker-alt"></i> <a href="https://goo.gl/maps/gdbEzMvNQ7rwQ7xn7?g_st=aw">Nuestra Ubicación</a></p>
                 </div>
             </div>
             <div class="footer-bottom">

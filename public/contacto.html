@@ -9,6 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+<script>
+    function menu(){
+        window.location.href = "menu.html";
+    }
+</script>
 <body>
     <!-- Encabezado -->
     <header class="header">
@@ -18,26 +23,16 @@
             </div>
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link">Inicio</a></li>
-                <li><a href="#" class="nav-link">Hamburguesa</a></li>
-                <li class="dropdown">
-                    <a href="#" class="nav-link dropdown-toggle">Menú <i class="fas fa-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Hamburguesas</a></li>
-                        <li><a href="#">Arepas</a></li>
-                        <li><a href="#">Bebidas</a></li>
-                        <li><a href="#">Postres</a></li>
-                    </ul>
-                </li>
-                <li><a href="#" class="nav-link">Sobre Nosotros</a></li>
+                <li><a href="menu.html" class="nav-link">Menú</a></li>
+                <li><a href="sobre.html" class="nav-link">Sobre Nosotros</a></li>
                 <li><a href="contacto.html" class="nav-link active">Contacto</a></li>
             </ul>
             <div class="nav-icons">
-                <button class="icon-btn" onclick="login()">
+                <div class="cart-icon" onclick="login()">
                     <i class="fas fa-user"></i>
-                </button>
-                <div class="cart-icon">
+                </div>
+                <div class="cart-icon" onclick="menu()">
                     <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count">0</span>
                 </div>
             </div>
         </nav>
@@ -158,20 +153,6 @@
         </div>
     </section>
 
-    <!-- Sección del Mapa -->
-    <section class="map-section">
-        <div class="container">
-            <h2>Nuestra Ubicación</h2>
-            <div class="map-container">
-                <div class="map-placeholder">
-                    <i class="fas fa-map-marked-alt"></i>
-                    <p>Mapa Interactivo</p>
-                    <small>Av. Principal, Centro Comercial Plaza Venezuela, Caracas</small>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Pie de Página -->
     <footer class="footer">
         <div class="container">
@@ -191,8 +172,8 @@
                 </div>
                 <div class="footer-section">
                     <h4>Contacto</h4>
-                    <p><i class="fas fa-phone"></i> +0000000000000</p>
-                    <p><i class="fas fa-envelope"></i> info@pikatasrestaurant.com</p>
+                    <p><i class="fas fa-phone"></i> <a href="https://wa.me/+50685396632">+50685396632</a></p>
+                    <p><i class="fas fa-map-marker-alt"></i> <a href="https://goo.gl/maps/gdbEzMvNQ7rwQ7xn7?g_st=aw">Nuestra Ubicación</a></p>
                 </div>
             </div>
             <div class="footer-bottom">
