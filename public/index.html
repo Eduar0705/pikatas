@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pikatas - Restaurante de Alta Cocina</title>
-    <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="img/PIKATAS_LOGO-removebg-preview.png" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -33,7 +32,138 @@
             }
         }
     </script>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        /* Animaciones CSS personalizadas */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(245, 158, 11, 0.8);
+            }
+        }
+
+        /* Elementos ocultos para animaciones */
+        .hidden-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .hidden-element.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Efecto de cristal para el navbar */
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Efectos para las tarjetas del menú */
+        .menu-card {
+            transition: all 0.3s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Estilo para los logos pequeños */
+        .logo {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Animación de escritura */
+        .typing-animation {
+            overflow: hidden;
+            border-right: 2px solid #f59e0b;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #f59e0b; }
+        }
+
+        /* Responsividad para móviles */
+        @media (max-width: 768px) {
+            .typing-animation {
+                white-space: normal;
+                border-right: none;
+                animation: fadeInUp 0.8s ease-out forwards;
+            }
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            position: fixed;
+            top: 64px;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            z-index: 40;
+        }
+
+        .mobile-menu.show {
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body class="font-inter text-elegant-dark bg-elegant-light">
     <nav class="fixed top-0 w-full glass-effect z-50 transition-all duration-300" id="navbar">
@@ -50,7 +180,6 @@
                         <a href="#reservas" class="bg-elegant-gold text-white px-6 py-2 rounded-full hover:bg-yellow-600 transition-all duration-300 font-medium transform hover:scale-105">Reservas</a>
                     </div>
                 </div>
-                <!-- <CHANGE> Added mobile menu button -->
                 <div class="md:hidden">
                     <button id="mobile-menu-btn" class="text-elegant-dark hover:text-elegant-gold transition-colors">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -60,9 +189,17 @@
                 </div>
             </div>
         </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#inicio" class="block text-elegant-dark hover:text-elegant-gold transition-colors font-medium">Inicio</a>
+                <a href="#menu" class="block text-elegant-dark hover:text-elegant-gold transition-colors font-medium">Menú</a>
+                <a href="#sobre-nosotros" class="block text-elegant-dark hover:text-elegant-gold transition-colors font-medium">Sobre Nosotros</a>
+                <a href="#reservas" class="block bg-elegant-gold text-white px-4 py-2 rounded-full text-center font-medium">Reservas</a>
+            </div>
+        </div>
     </nav>
 
-    <!-- <CHANGE> Enhanced hero section with parallax and typing animation -->
     <section id="inicio" class="relative h-screen flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"></div>
         <div class="parallax absolute inset-0">
@@ -72,12 +209,12 @@
         </div>
         <div class="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
             <div class="hidden-element" data-delay="0">
-                <h1 class="font-playfair text-5xl md:text-7xl font-bold mb-6 text-balance typing-animation">
+                <h1 class="font-playfair text-3xl md:text-5xl lg:text-7xl font-bold mb-6 text-balance">
                     Experiencia Culinaria Extraordinaria
                 </h1>
             </div>
             <div class="hidden-element" data-delay="200">
-                <p class="text-xl md:text-2xl mb-8 font-light leading-relaxed text-pretty animate-fade-in-up">
+                <p class="text-lg md:text-xl lg:text-2xl mb-8 font-light leading-relaxed text-pretty animate-fade-in-up">
                     Descubre sabores únicos en un ambiente de elegancia y sofisticación
                 </p>
             </div>
@@ -90,7 +227,6 @@
                 </a>
             </div>
         </div>
-        <!-- <CHANGE> Added floating particles effect -->
         <div class="absolute inset-0 pointer-events-none">
             <div class="particle absolute w-2 h-2 bg-elegant-gold rounded-full opacity-70 animate-float" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
             <div class="particle absolute w-1 h-1 bg-white rounded-full opacity-50 animate-float" style="top: 60%; left: 80%; animation-delay: 1s;"></div>
@@ -98,7 +234,6 @@
         </div>
     </section>
 
-    <!-- <CHANGE> Enhanced about section with staggered animations -->
     <section id="sobre-nosotros" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -107,7 +242,7 @@
                         Nuestra Historia
                     </h2>
                     <p class="text-lg leading-relaxed text-elegant-medium mb-6">
-                        En Lumière, cada plato cuenta una historia. Nuestro chef ejecutivo combina técnicas culinarias tradicionales con innovación moderna para crear experiencias gastronómicas inolvidables.
+                        En Pikatas, cada plato cuenta una historia. Nuestro chef ejecutivo combina técnicas culinarias tradicionales con innovación moderna para crear experiencias gastronómicas inolvidables.
                     </p>
                     <p class="text-lg leading-relaxed text-elegant-medium mb-8">
                         Desde 2015, hemos sido reconocidos por nuestra excelencia culinaria y nuestro compromiso con los ingredientes de la más alta calidad.
@@ -115,7 +250,7 @@
                     <div class="flex items-center space-x-8">
                         <div class="text-center counter-item" data-target="3">
                             <div class="font-playfair text-3xl font-bold text-elegant-gold counter">0</div>
-                            <div class="text-sm text-elegant-medium">★ Michelin</div>
+                            <div class="text-sm text-elegant-medium">★ Estrella</div>
                         </div>
                         <div class="text-center counter-item" data-target="2015">
                             <div class="font-playfair text-3xl font-bold text-elegant-gold counter">0</div>
@@ -139,7 +274,6 @@
         </div>
     </section>
 
-    <!-- <CHANGE> Enhanced menu section with advanced hover effects -->
     <section id="menu" class="py-20 bg-elegant-light">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 hidden-element" data-delay="0">
@@ -152,7 +286,6 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- <CHANGE> Enhanced menu cards with advanced animations -->
                 <div class="menu-card bg-white rounded-xl shadow-lg overflow-hidden hidden-element" data-delay="100">
                     <div class="relative overflow-hidden">
                         <img src="img/pulpo.jpg" 
@@ -212,17 +345,16 @@
             </div>
 
             <div class="text-center mt-12 hidden-element" data-delay="400">
-                <a href="#" class="bg-elegant-dark text-white px-8 py-4 rounded-full hover:bg-gray-800 transition-all duration-300 font-semibold text-lg transform hover:scale-105 inline-flex items-center space-x-2">
+                <button class="bg-elegant-dark text-white px-8 py-4 rounded-full hover:bg-gray-800 transition-all duration-300 font-semibold text-lg transform hover:scale-105 inline-flex items-center space-x-2">
                     <span>Ver Menú Completo</span>
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                     </svg>
-                </a>
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- <CHANGE> Enhanced reservation section with modern form styling -->
     <section id="reservas" class="py-20 bg-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 hidden-element" data-delay="0">
@@ -235,7 +367,7 @@
             </div>
 
             <div class="bg-gradient-to-br from-elegant-light to-white rounded-2xl p-8 shadow-xl hidden-element" data-delay="200">
-                <form id="reservation-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <form id="reservation-form" class="grid grid-cols-1 md:grid-cols-2 gap-6" method="post" action="/enviarInfo">
                     <div class="form-group">
                         <label for="nombre" class="block text-sm font-semibold text-elegant-dark mb-2">Nombre Completo</label>
                         <input type="text" id="nombre" name="nombre" required
@@ -247,7 +379,7 @@
                         <label for="telefono" class="block text-sm font-semibold text-elegant-dark mb-2">Teléfono</label>
                         <input type="tel" id="telefono" name="telefono" required
                                 class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:ring-2 focus:ring-elegant-gold focus:border-elegant-gold transition-all duration-300 bg-white"
-                                placeholder="+34 600 000 000">
+                                placeholder="+506 8539-6632">
                     </div>
                     
                     <div class="form-group">
@@ -261,13 +393,17 @@
                         <select id="hora" name="hora" required
                                 class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:ring-2 focus:ring-elegant-gold focus:border-elegant-gold transition-all duration-300 bg-white">
                             <option value="">Selecciona una hora</option>
-                            <option value="19:00">19:00</option>
-                            <option value="19:30">19:30</option>
-                            <option value="20:00">20:00</option>
-                            <option value="20:30">20:30</option>
-                            <option value="21:00">21:00</option>
-                            <option value="21:30">21:30</option>
-                            <option value="22:00">22:00</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                            <option value="13:00">1:00 PM</option>
+                            <option value="14:00">2:00 PM</option>
+                            <option value="19:00">7:00 PM</option>
+                            <option value="19:30">7:30 PM</option>
+                            <option value="20:00">8:00 PM</option>
+                            <option value="20:30">8:30 PM</option>
+                            <option value="21:00">9:00 PM</option>
+                            <option value="21:30">9:30 PM</option>
+                            <option value="22:00">10:00 PM</option>
                         </select>
                     </div>
                     
@@ -313,7 +449,6 @@
         </div>
     </section>
 
-    <!-- <CHANGE> Enhanced footer with modern styling -->
     <footer class="bg-elegant-dark text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -328,27 +463,19 @@
                     <h4 class="font-semibold text-lg mb-4">Contacto</h4>
                     <div class="space-y-3 text-gray-300">
                         <p class="flex items-center space-x-2">
-                            <span>
-                                <img src="img/ubi.png" alt="Ubicacion" class="logo">
-                            </span>
-                            <a href="https://goo.gl/maps/gdbEzMvNQ7rwQ7xn7?g_st=aw" target="_blank" class="hover:underline">Ubicanos</a>
+                            <img src="img/ubi.png" class="logo" alt="ubicacion">
+                            <a href="https://maps.app.goo.gl/4fjUnT1yWckhYosq6" target="_blank" class="hover:underline">Ubicanos</a>
                         </p>
                         <p class="flex items-center space-x-2">
-                            <span>
-                                <img src="img/ws.webp" class="logo" alt="logo_phone">
-                            </span>
-                            <a href="https://wa.me/+50685396632" target="_blank" class="hover:underline">+50685396632</a>
+                            <img src="img/ws.webp" class="logo" alt="whasap">
+                            <a href="https://wa.me/+50685396632" target="_blank" class="hover:underline">WhatsApp</a>
                         </p>
                         <p class="flex items-center space-x-2">
-                            <span>
-                                <img src="img/Instagram.webp" class="logo" alt="logo_insta">
-                            </span>
+                            <img src="img/Instagram.webp" class="logo" alt="ig">
                             <a href="https://www.instagram.com/pikatastamarindo?igsh=MW84YndrbTU3OTF5Ng==" target="_blank" class="hover:underline">Instagram</a>
                         </p>
                         <p class="flex items-center space-x-2">
-                            <span>
-                                <img src="img/face.webp" class="logo" alt="logo_face">
-                            </span>
+                            <img src="img/face.webp" class="logo" alt="facebook">
                             <a href="https://www.facebook.com/pikatasplayatamarindo/?ref=_xav_ig_profile_page_web#" target="_blank" class="hover:underline">Facebook</a>
                         </p>
                     </div>
@@ -367,7 +494,247 @@
             </div>
         </div>
     </footer>
-    <script src="js/script.js"></script>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.dataset.delay || 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('reveal');
+                    }, delay);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all hidden elements
+        document.querySelectorAll('.hidden-element').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.parallax');
+            const navbar = document.getElementById('navbar');
+            
+            if (parallax) {
+                parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+            
+            // Navbar background change on scroll
+            if (scrolled > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.1)';
+            }
+        });
+
+        // Counter animation
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current);
+            }, 20);
+        }
+
+        // Trigger counters when visible
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target.querySelector('.counter');
+                    const target = parseInt(entry.target.dataset.target);
+                    animateCounter(counter, target);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        document.querySelectorAll('.counter-item').forEach(item => {
+            counterObserver.observe(item);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('show');
+                
+                // Toggle hamburger to X
+                const svg = this.querySelector('svg path');
+                if (mobileMenu.classList.contains('show')) {
+                    svg.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+                } else {
+                    svg.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+                }
+            });
+
+            // Close mobile menu when clicking on links
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('show');
+                    const svg = mobileMenuBtn.querySelector('svg path');
+                    svg.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+                });
+            });
+        }
+
+        // Form submission with WhatsApp redirect
+        document.getElementById('reservation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {
+                nombre: formData.get('nombre'),
+                telefono: formData.get('telefono'),
+                fecha: formData.get('fecha'),
+                hora: formData.get('hora'),
+                comensales: formData.get('comensales'),
+                email: formData.get('email'),
+                comentarios: formData.get('comentarios') || 'Sin comentarios especiales'
+            };
+            
+            // Validate required fields
+            if (!data.nombre || !data.telefono || !data.fecha || !data.hora || !data.comensales || !data.email) {
+                alert('Por favor, completa todos los campos requeridos.');
+                return;
+            }
+
+            const submitBtn = document.getElementById('submit-btn');
+            const originalText = submitBtn.innerHTML;
+            
+            // Loading state
+            submitBtn.innerHTML = `
+                <svg class="animate-spin w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Procesando...
+            `;
+            submitBtn.disabled = true;
+            
+            // Format WhatsApp message
+            const formattedMessage = `📄 *Nueva Reserva - Pikatas* 📄\n\n` +
+                                    `👤 *Nombre:* ${data.nombre}\n` +
+                                    `📞 *Teléfono:* ${data.telefono}\n\n` +
+                                    `📅 *Fecha:* ${data.fecha}\n` +
+                                    `⏰ *Hora:* ${data.hora}\n` +
+                                    `🍽️ *Comensales:* ${data.comensales}\n` +
+                                    `📧 *Email:* ${data.email}\n\n` +
+                                    `📝 *Comentarios:*\n${data.comentarios}\n\n` +
+                                    `**Reserva enviada desde la web de Pikatas**`;
+            
+            // Create WhatsApp URL
+            const phoneNumber = '+50685396632';
+            const phoneNumber1 = '+584145003573';
+            const encodedMessage = encodeURIComponent(formattedMessage);
+            const whatsappUrl = `https://wa.me/${phoneNumber1}?text=${encodedMessage}`;
+            
+            // Simulate processing time
+            setTimeout(() => {
+                // Open WhatsApp
+                window.open(whatsappUrl, '_blank');
+                
+                // Show success state
+                submitBtn.innerHTML = `
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    ¡Redirigiendo a WhatsApp!
+                `;
+                submitBtn.classList.add('bg-green-500', 'hover:bg-green-600');
+                submitBtn.classList.remove('bg-elegant-gold', 'hover:bg-yellow-600');
+                
+                // Show success notification
+                const successMessage = document.createElement('div');
+                successMessage.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+                successMessage.textContent = '¡Te hemos redirigido a WhatsApp para confirmar tu reserva!';
+                document.body.appendChild(successMessage);
+                
+                setTimeout(() => {
+                    successMessage.style.transform = 'translateX(0)';
+                }, 100);
+                
+                setTimeout(() => {
+                    successMessage.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        if (document.body.contains(successMessage)) {
+                            document.body.removeChild(successMessage);
+                        }
+                    }, 300);
+                }, 4000);
+                
+                // Reset form after 3 seconds
+                setTimeout(() => {
+                    this.reset();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+                    submitBtn.classList.add('bg-elegant-gold', 'hover:bg-yellow-600');
+                }, 3000);
+            }, 1500);
+        });
+
+        // Form field focus effects
+        document.querySelectorAll('.form-group input, .form-group select, .form-group textarea').forEach(field => {
+            field.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            
+            field.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.parentElement.classList.remove('focused');
+                }
+            });
+        });
+
+        // Add hover effects to navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+            
+            link.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Set minimum date for reservation form
+        const dateInput = document.getElementById('fecha');
+        if (dateInput) {
+            const today = new Date();
+            const formattedDate = today.toISOString().split('T')[0];
+            dateInput.setAttribute('min', formattedDate);
+        }
+    </script>
 
 </body>
 </html>
