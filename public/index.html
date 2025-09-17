@@ -1,134 +1,373 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pikatas - Restaurante de Comida Rápida</title>
+    <title>Pikatas - Restaurante de Alta Cocina</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="shortcut icon" href="./img/PIKATAS_LOGO-removebg-preview.png" type="image/x-icon">
+    <link rel="shortcut icon" href="img/PIKATAS_LOGO-removebg-preview.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'playfair': ['Playfair Display', 'serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'elegant-dark': '#0f172a',
+                        'elegant-gold': '#f59e0b',
+                        'elegant-light': '#f8fafc',
+                        'elegant-medium': '#64748b',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'fade-in-left': 'fadeInLeft 0.8s ease-out forwards',
+                        'fade-in-right': 'fadeInRight 0.8s ease-out forwards',
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
-<body>
-    <!-- Encabezado -->
-    <header class="header">
-        <nav class="navbar">
-            <div class="nav-brand">
-                <img src="./img/PIKATAS_LOGO.png" alt="logo" style="width: 150px;">
-            </div>
-            
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link active">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a href="menu.html" class="nav-link">Menú</a>
-                </li>
-                <li class="nav-item">
-                    <a href="sobre.html" class="nav-link">Sobre Nosotros</a>
-                </li>
-                <li class="nav-item">
-                    <a href="contacto.html" class="nav-link">Contacto</a>
-                </li>
-            </ul>
-            
-            <div class="nav-icons">
-                <button class="icon-btn" onclick="login()">
-                    <i class="fas fa-user"></i>
-                </button>
-                <button class="icon-btn cart-btn" onclick="menu()">
-                    <i class="fas fa-shopping-cart"></i>
-                </button>
-            </div>
-            
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Sección Principal -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h2 class="hero-title">
-                    Súper Deliciosa<br>
-                    <span class="highlight">Hamburguesa</span>
-                </h2>
-                <p class="hero-description">
-                    ¡Ven y prueba una nueva experiencia con una rica comida venezolana!
-                </p>
-                <div class="hero-actions">
-                    <button class="order-btn" onclick="menu()">Ordenar Ahora</button>
-                    <span class="price">$10.50</span>
+<body class="font-inter text-elegant-dark bg-elegant-light">
+    <nav class="fixed top-0 w-full glass-effect z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="font-playfair text-2xl font-bold text-elegant-dark animate-glow">PIKATAS</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#inicio" class="nav-link text-elegant-dark hover:text-elegant-gold transition-all duration-300 font-medium relative">Inicio</a>
+                        <a href="#menu" class="nav-link text-elegant-dark hover:text-elegant-gold transition-all duration-300 font-medium relative">Menú</a>
+                        <a href="#sobre-nosotros" class="nav-link text-elegant-dark hover:text-elegant-gold transition-all duration-300 font-medium relative">Sobre Nosotros</a>
+                        <a href="#reservas" class="bg-elegant-gold text-white px-6 py-2 rounded-full hover:bg-yellow-600 transition-all duration-300 font-medium transform hover:scale-105">Reservas</a>
+                    </div>
+                </div>
+                <!-- <CHANGE> Added mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-elegant-dark hover:text-elegant-gold transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
-            <div class="hero-image">
-                <img src="./img/burger.png" alt="Súper Deliciosa Hamburguesa" class="burger-img">
+        </div>
+    </nav>
+
+    <!-- <CHANGE> Enhanced hero section with parallax and typing animation -->
+    <section id="inicio" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"></div>
+        <div class="parallax absolute inset-0">
+            <img src="img/restaurat.jpg" 
+                    alt="Interior elegante del restaurante" 
+                    class="w-full h-full object-cover">
+        </div>
+        <div class="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
+            <div class="hidden-element" data-delay="0">
+                <h1 class="font-playfair text-5xl md:text-7xl font-bold mb-6 text-balance typing-animation">
+                    Experiencia Culinaria Extraordinaria
+                </h1>
+            </div>
+            <div class="hidden-element" data-delay="200">
+                <p class="text-xl md:text-2xl mb-8 font-light leading-relaxed text-pretty animate-fade-in-up">
+                    Descubre sabores únicos en un ambiente de elegancia y sofisticación
+                </p>
+            </div>
+            <div class="hidden-element flex flex-col sm:flex-row gap-4 justify-center" data-delay="400">
+                <a href="#menu" class="cta-button bg-elegant-gold text-white px-8 py-4 rounded-full hover:bg-yellow-600 transition-all duration-300 font-semibold text-lg transform hover:scale-105 animate-float">
+                    Ver Menú
+                </a>
+                <a href="#reservas" class="cta-button border-2 border-white text-white px-8 py-4 rounded-full hover:bg-white hover:text-elegant-dark transition-all duration-300 font-semibold text-lg transform hover:scale-105">
+                    Hacer Reserva
+                </a>
             </div>
         </div>
-        <div class="hero-bg-shapes">
-            <div class="shape-1"></div>
-            <div class="shape-2"></div>
+        <!-- <CHANGE> Added floating particles effect -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="particle absolute w-2 h-2 bg-elegant-gold rounded-full opacity-70 animate-float" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+            <div class="particle absolute w-1 h-1 bg-white rounded-full opacity-50 animate-float" style="top: 60%; left: 80%; animation-delay: 1s;"></div>
+            <div class="particle absolute w-3 h-3 bg-elegant-gold rounded-full opacity-40 animate-float" style="top: 80%; left: 20%; animation-delay: 2s;"></div>
         </div>
     </section>
 
-    <!-- Carrito Lateral -->
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h3>Tu Pedido</h3>
-            <button class="close-cart" onclick="toggleCart()">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="cart-items" id="cartItems">
-            <!-- Los productos del carrito serán agregados por JavaScript -->
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <strong>Total: $<span id="cartTotal">0.00</span></strong>
-            </div>
-            <button class="checkout-btn" onclick="checkout()">
-                <i class="fas fa-credit-card"></i>
-                Proceder al Pago
-            </button>
-        </div>
-    </div>
-
-    <!-- Fondo Oscuro del Carrito -->
-    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-
-    <!-- Pie de Página -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <img src="img/PIKATAS_LOGO-removebg-preview.png" alt="logo" style="width: 150px;">
-                    <p>La mejor comida rápida venezolana en la ciudad. Sabores auténticos que te transportarán.</p>
+    <!-- <CHANGE> Enhanced about section with staggered animations -->
+    <section id="sobre-nosotros" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="hidden-element" data-delay="0">
+                    <h2 class="font-playfair text-4xl md:text-5xl font-bold mb-6 text-elegant-dark">
+                        Nuestra Historia
+                    </h2>
+                    <p class="text-lg leading-relaxed text-elegant-medium mb-6">
+                        En Lumière, cada plato cuenta una historia. Nuestro chef ejecutivo combina técnicas culinarias tradicionales con innovación moderna para crear experiencias gastronómicas inolvidables.
+                    </p>
+                    <p class="text-lg leading-relaxed text-elegant-medium mb-8">
+                        Desde 2015, hemos sido reconocidos por nuestra excelencia culinaria y nuestro compromiso con los ingredientes de la más alta calidad.
+                    </p>
+                    <div class="flex items-center space-x-8">
+                        <div class="text-center counter-item" data-target="3">
+                            <div class="font-playfair text-3xl font-bold text-elegant-gold counter">0</div>
+                            <div class="text-sm text-elegant-medium">★ Michelin</div>
+                        </div>
+                        <div class="text-center counter-item" data-target="2015">
+                            <div class="font-playfair text-3xl font-bold text-elegant-gold counter">0</div>
+                            <div class="text-sm text-elegant-medium">Establecido</div>
+                        </div>
+                        <div class="text-center counter-item" data-target="50">
+                            <div class="font-playfair text-3xl font-bold text-elegant-gold counter">0</div>
+                            <div class="text-sm text-elegant-medium">Premios</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="footer-section">
-                    <h4>Enlaces Rápidos</h4>
-                    <ul>
-                        <li><a href="index.html">Inicio</a></li>
-                        <li><a href="#menu">Menú</a></li>
-                        <li><a href="sobre.html">Nosotros</a></li>
-                        <li><a href="contacto.html">Contacto</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contacto</h4>
-                    <p><i class="fas fa-phone"></i> <a href="https://wa.me/+50685396632">+50685396632</a></p>
-                    <p><i class="fas fa-map-marker-alt"></i> <a href="https://goo.gl/maps/gdbEzMvNQ7rwQ7xn7?g_st=aw">Nuestra Ubicación</a></p>
+                <div class="relative hidden-element" data-delay="200">
+                    <div class="relative overflow-hidden rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                        <img src="img/chef.webp" 
+                                alt="Chef preparando plato gourmet" 
+                                class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">
+        </div>
+    </section>
+
+    <!-- <CHANGE> Enhanced menu section with advanced hover effects -->
+    <section id="menu" class="py-20 bg-elegant-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 hidden-element" data-delay="0">
+                <h2 class="font-playfair text-4xl md:text-5xl font-bold mb-6 text-elegant-dark">
+                    Menú Degustación
+                </h2>
+                <p class="text-xl text-elegant-medium max-w-3xl mx-auto leading-relaxed">
+                    Una selección cuidadosa de nuestros platos más emblemáticos, creados con ingredientes de temporada y técnicas innovadoras.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- <CHANGE> Enhanced menu cards with advanced animations -->
+                <div class="menu-card bg-white rounded-xl shadow-lg overflow-hidden hidden-element" data-delay="100">
+                    <div class="relative overflow-hidden">
+                        <img src="img/pulpo.jpg" 
+                                alt="Pulpo a la parrilla" 
+                                class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110">
+                        <div class="absolute top-4 right-4 bg-elegant-gold text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            Signature
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-playfair text-xl font-bold mb-2 text-elegant-dark">Pulpo a la Parrilla</h3>
+                        <p class="text-elegant-medium mb-4 leading-relaxed">
+                            Pulpo fresco a la brasa con puré de patata ahumado y aceite de pimentón
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-elegant-gold text-lg">$16</span>
+                            <span class="text-sm text-elegant-medium bg-elegant-light px-3 py-1 rounded-full">Entrante</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card bg-white rounded-xl shadow-lg overflow-hidden hidden-element" data-delay="200">
+                    <div class="relative overflow-hidden">
+                        <img src="img/arroz_camaron.jpg" 
+                                alt="Arroz con camarón" 
+                                class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-playfair text-xl font-bold mb-2 text-elegant-dark">Arroz con Camarón</h3>
+                        <p class="text-elegant-medium mb-4 leading-relaxed">
+                            Arroz cremoso con camarones frescos, toque de cilantro y limón
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-elegant-gold text-lg">$28</span>
+                            <span class="text-sm text-elegant-medium bg-elegant-light px-3 py-1 rounded-full">Principal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card bg-white rounded-xl shadow-lg overflow-hidden hidden-element" data-delay="300">
+                    <div class="relative overflow-hidden">
+                        <img src="img/papas.jpg" 
+                                alt="Papas fritas gourmet" 
+                                class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-playfair text-xl font-bold mb-2 text-elegant-dark">Papas Fritas Gourmet</h3>
+                        <p class="text-elegant-medium mb-4 leading-relaxed">
+                            Papas crujientes cortadas a mano, servidas con salsa especial de la casa
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-elegant-gold text-lg">$10</span>
+                            <span class="text-sm text-elegant-medium bg-elegant-light px-3 py-1 rounded-full">Entrante</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12 hidden-element" data-delay="400">
+                <a href="#" class="bg-elegant-dark text-white px-8 py-4 rounded-full hover:bg-gray-800 transition-all duration-300 font-semibold text-lg transform hover:scale-105 inline-flex items-center space-x-2">
+                    <span>Ver Menú Completo</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- <CHANGE> Enhanced reservation section with modern form styling -->
+    <section id="reservas" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 hidden-element" data-delay="0">
+                <h2 class="font-playfair text-4xl md:text-5xl font-bold mb-6 text-elegant-dark">
+                    Reserva tu Mesa
+                </h2>
+                <p class="text-xl text-elegant-medium leading-relaxed">
+                    Garantiza tu experiencia culinaria única. Te esperamos para crear momentos inolvidables.
+                </p>
+            </div>
+
+            <div class="bg-gradient-to-br from-elegant-light to-white rounded-2xl p-8 shadow-xl hidden-element" data-delay="200">
+                <form id="reservation-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="form-group">
+                        <label for="nombre" class="block text-sm font-semibold text-elegant-dark mb-2">Nombre Completo</label>
+                        <input type="text" id="nombre" name="nombre" required
+                                class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:ring-2 focus:ring-elegant-gold focus:border-elegant-gold transition-all duration-300 bg-white"
+                                placeholder="Tu nombre completo">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefono" class="block text-sm font-semibold text-elegant-dark mb-2">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" required
+                                class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:ring-2 focus:ring-elegant-gold focus:border-elegant-gold transition-all duration-300 bg-white"
+                                placeholder="+34 600 000 000">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fecha" class="block text-sm font-semibold text-elegant-dark mb-2">Fecha</label>
+                        <input type="date" id="fecha" name="fecha" required
+                                class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:ring-2 focus:ring-elegant-gold focus:border-elegant-gold transition-all duration-300 bg-white">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="hora" class="block text-sm font-semibold text-elegant-dark mb-2">Hora</label>
+                        <select id="hora" name="hora" required
+                                class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:ring-2 focus:ring-elegant-gold focus:border-elegant-gold transition-all duration-300 bg-white">
+                            <option value="">Selecciona una hora</option>
+                            <option value="19:00">19:00</option>
+                            <option value="19:30">19:30</option>
+                            <option value="20:00">20:00</option>
+                            <option value="20:30">20:30</option>
+                            <option value="21:00">21:00</option>
+                            <option value="21:30">21:30</option>
+                            <option value="22:00">22:00</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="comensales" class="block text-sm font-semibold text-elegant-dark mb-2">Número de Comensales</label>
+                        <select id="comensales" name="comensales" required
+                                class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:ring-2 focus:ring-elegant-gold focus:border-elegant-gold transition-all duration-300 bg-white">
+                            <option value="">Selecciona</option>
+                            <option value="1">1 persona</option>
+                            <option value="2">2 personas</option>
+                            <option value="3">3 personas</option>
+                            <option value="4">4 personas</option>
+                            <option value="5">5 personas</option>
+                            <option value="6">6+ personas</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" class="block text-sm font-semibold text-elegant-dark mb-2">Email</label>
+                        <input type="email" id="email" name="email" required
+                                class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:ring-2 focus:ring-elegant-gold focus:border-elegant-gold transition-all duration-300 bg-white"
+                                placeholder="tu@email.com">
+                    </div>
+                    
+                    <div class="md:col-span-2 form-group">
+                        <label for="comentarios" class="block text-sm font-semibold text-elegant-dark mb-2">Comentarios Especiales</label>
+                        <textarea id="comentarios" name="comentarios" rows="4" 
+                                    class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:ring-2 focus:ring-elegant-gold focus:border-elegant-gold transition-all duration-300 bg-white resize-none"
+                                    placeholder="Alergias, celebraciones especiales, preferencias..."></textarea>
+                    </div>
+                    
+                    <div class="md:col-span-2 text-center">
+                        <button type="submit" id="submit-btn"
+                                class="bg-elegant-gold text-white px-12 py-4 rounded-full hover:bg-yellow-600 transition-all duration-300 font-semibold text-lg transform hover:scale-105 inline-flex items-center space-x-2">
+                            <span>Confirmar Reserva</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- <CHANGE> Enhanced footer with modern styling -->
+    <footer class="bg-elegant-dark text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="hidden-element" data-delay="0">
+                    <h3 class="font-playfair text-2xl font-bold mb-4 text-elegant-gold">Pikatas</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Una experiencia culinaria única en el corazón de la ciudad, donde cada plato es una obra de arte.
+                    </p>
+                </div>
+                
+                <div class="hidden-element" data-delay="100">
+                    <h4 class="font-semibold text-lg mb-4">Contacto</h4>
+                    <div class="space-y-3 text-gray-300">
+                        <p class="flex items-center space-x-2">
+                            <span>
+                                <img src="img/ubi.png" alt="Ubicacion" class="logo">
+                            </span>
+                            <a href="https://goo.gl/maps/gdbEzMvNQ7rwQ7xn7?g_st=aw" target="_blank" class="hover:underline">Ubicanos</a>
+                        </p>
+                        <p class="flex items-center space-x-2">
+                            <span>
+                                <img src="img/ws.webp" class="logo" alt="logo_phone">
+                            </span>
+                            <a href="https://wa.me/+50685396632" target="_blank" class="hover:underline">+50685396632</a>
+                        </p>
+                        <p class="flex items-center space-x-2">
+                            <span>
+                                <img src="img/Instagram.webp" class="logo" alt="logo_insta">
+                            </span>
+                            <a href="https://www.instagram.com/pikatastamarindo?igsh=MW84YndrbTU3OTF5Ng==" target="_blank" class="hover:underline">Instagram</a>
+                        </p>
+                        <p class="flex items-center space-x-2">
+                            <span>
+                                <img src="img/face.webp" class="logo" alt="logo_face">
+                            </span>
+                            <a href="https://www.facebook.com/pikatasplayatamarindo/?ref=_xav_ig_profile_page_web#" target="_blank" class="hover:underline">Facebook</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="hidden-element" data-delay="200">
+                    <h4 class="font-semibold text-lg mb-4">Horarios</h4>
+                    <div class="space-y-2 text-gray-300">
+                        <p>Todos los días: 11:00 AM - 02:00 AM</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-400">
                 <p>&copy; 2025 Pikatas Restaurant. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/script.js"></script>
+
 </body>
 </html>

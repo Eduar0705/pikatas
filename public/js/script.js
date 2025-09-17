@@ -1,393 +1,172 @@
-const menuItems = [
-    {
-        id: 1,
-        name: "Súper Deliciosa Hamburguesa",
-        description: "Hamburguesa con carne jugosa, lechuga, tomate, cebolla y nuestra salsa especial",
-        price: 10.50,
-        category: "burgers",
-        image: "img/burger.png"
-    },
-    {
-        id: 2,
-        name: "Pepito Especial",
-        description: "Pan francés con carne mechada, queso amarillo, aguacate y salsas",
-        price: 9.50,
-        category: "burgers",
-        image: "img/pepito.png"
-    },
-    {
-        id: 3,
-        name: "Patacones",
-        description: "Plátano verde frito con queso rallado y hogao",
-        price: 6.00,
-        category: "sides",
-        image: "img/patacones.png"
-    },
-    {
-        id: 4,
-        name: "Yuca Frita",
-        description: "Yuca dorada y crujiente con ajo y cilantro",
-        price: 5.50,
-        category: "sides",
-        image: "img/yuca.png"
-    },
-    {
-        id: 5,
-        name: "Tequeños",
-        description: "Palitos de queso envueltos en masa y fritos hasta dorar",
-        price: 8.00,
-        category: "sides",
-        image: "img/tequeño.png"
-    },
-    {
-        id: 6,
-        name: "Jugo Natural",
-        description: "Jugos frescos de frutas tropicales: mango, parchita, guayaba",
-        price: 4.50,
-        category: "drinks",
-        image: "img/jugofrut.png"
-    },
-    {
-        id: 7,
-        name: "Pollo a la Parrilla",
-        description: "Jugoso pollo asado con especias tradicionales",
-        price: 11.00,
-        category: "chicken",
-        image: "img/topcard3.png" 
-    },
-    {
-        id: 8,
-        name: "Alitas Picantes",
-        description: "Alitas de pollo bañadas en nuestra salsa picante especial",
-        price: 9.00,
-        category: "chicken",
-        image: "img/p2.png"
-    },
-    {
-        id: 9,
-        name: "Pizza Hawaiana",
-        description: "Clásica pizza con piña, jamón y queso mozzarella",
-        price: 14.00,
-        category: "pizza",
-        image: "img/topcard2.png"
-    },
-    {
-        id: 10,
-        name: "Pizza Especial",
-        description: "Pizza con pepperoni, champiñones, pimientos y queso",
-        price: 15.50,
-        category: "pizza",
-        image: "img/p1.png"
-    }
-];
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
-function menu(){
-    window.location.href = "menu.html";
-}
-// Carrito de compras
-let cart = [];
-
-// Elementos del DOM
-const menuGrid = document.getElementById('menuGrid');
-const cartSidebar = document.getElementById('cartSidebar');
-const cartOverlay = document.getElementById('cartOverlay');
-const cartItems = document.getElementById('cartItems');
-const cartCount = document.getElementById('cartCount');
-const cartTotal = document.getElementById('cartTotal');
-
-// Inicializar la aplicación
-document.addEventListener('DOMContentLoaded', function() {
-    renderMenuItems('all');
-    setupCategoryButtons();
-    setupMobileMenu();
-    updateCartUI();
-});
-
-// Mostrar productos del menú
-function renderMenuItems(category) {
-    const filteredItems = category === 'all' ? menuItems : menuItems.filter(item => item.category === category);
-    
-    menuGrid.innerHTML = filteredItems.map(item => `
-        <div class="menu-item" data-category="${item.category}">
-            <img src="${item.image}" alt="${item.name}" class="menu-item-image">
-            <div class="menu-item-content">
-                <h3 class="menu-item-title">${item.name}</h3>
-                <p class="menu-item-description">${item.description}</p>
-                <div class="menu-item-footer">
-                    <span class="menu-item-price">$${item.price.toFixed(2)}</span>
-                    <button class="add-to-cart-btn" onclick="addToCart(${item.id})">
-                        <i class="fas fa-plus"></i> Agregar
-                    </button>
-                </div>
-            </div>
-        </div>
-    `).join('');
-}
-
-// Botones de categorías
-function setupCategoryButtons() {
-    const categoryButtons = document.querySelectorAll('.category-btn');
-    
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Quitar clase activa de todos los botones
-            categoryButtons.forEach(btn => btn.classList.remove('active'));
-            // Agregar clase activa al botón clicado
-            button.classList.add('active');
-            
-            // Filtrar productos
-            const category = button.getAttribute('data-category');
-            renderMenuItems(category);
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const delay = entry.target.dataset.delay || 0;
+                setTimeout(() => {
+                    entry.target.classList.add('reveal');
+                }, delay);
+            }
         });
+    }, observerOptions);
+
+    // Observe all hidden elements
+    document.querySelectorAll('.hidden-element').forEach(el => {
+        observer.observe(el);
     });
-}
 
-// Menú móvil
-function setupMobileMenu() {
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    
-    hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-    });
-    
-    // Cerrar menú móvil al hacer clic en un enlace
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-        });
-    });
-}
-
-// Agregar producto al carrito
-function addToCart(itemId) {
-    const item = menuItems.find(item => item.id === itemId);
-    const existingItem = cart.find(cartItem => cartItem.id === itemId);
-    
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({
-            ...item,
-            quantity: 1
-        });
-    }
-    
-    updateCartUI();
-    showAddToCartAnimation();
-    
-    // Notificación de ítem agregado
-    Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: '¡Agregado al carrito!',
-        text: item.name,
-        showConfirmButton: false,
-        timer: 1500,
-        toast: true,
-        background: 'var(--white)',
-        color: 'var(--text-color)'
-    });
-}
-
-// Quitar producto del carrito
-function removeFromCart(itemId) {
-    const item = cart.find(item => item.id === itemId);
-    
-    Swal.fire({
-        title: '¿Eliminar producto?',
-        text: `¿Estás seguro de que quieres eliminar ${item.name} del carrito?`,
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: 'var(--primary-color)',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, eliminar',
-        cancelButtonText: 'Cancelar'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            cart = cart.filter(item => item.id !== itemId);
-            updateCartUI();
-            
-            Swal.fire({
-                icon: 'success',
-                title: 'Producto eliminado',
-                text: `${item.name} ha sido removido del carrito`,
-                timer: 1500,
-                showConfirmButton: false,
-                toast: true,
-                position: 'top-end'
-            });
-        }
-    });
-}
-
-// Cambiar cantidad de producto
-function updateQuantity(itemId, change) {
-    const item = cart.find(cartItem => cartItem.id === itemId);
-    if (item) {
-        item.quantity += change;
-        if (item.quantity <= 0) {
-            removeFromCart(itemId);
-        } else {
-            updateCartUI();
-        }
-    }
-}
-
-// Actualizar interfaz del carrito
-function updateCartUI() {
-    // Actualizar contador
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartCount.textContent = totalItems;
-    cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
-    
-    // Actualizar total
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    cartTotal.textContent = total.toFixed(2);
-    
-    // Mostrar productos del carrito
-    if (cart.length === 0) {
-        cartItems.innerHTML = `
-            <div class="empty-cart">
-                <i class="fas fa-shopping-cart" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
-                <p>Tu carrito está vacío</p>
-                <p style="font-size: 0.9rem; margin-top: 0.5rem;">Agrega algunos productos deliciosos</p>
-            </div>
-        `;
-    } else {
-        cartItems.innerHTML = cart.map(item => `
-            <div class="cart-item">
-                <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-                <div class="cart-item-details">
-                    <div class="cart-item-title">${item.name}</div>
-                    <div class="cart-item-price">$${item.price.toFixed(2)}</div>
-                    <div class="quantity-controls">
-                        <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <span class="quantity">${item.quantity}</span>
-                        <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
-                </div>
-                <button class="remove-item" onclick="removeFromCart(${item.id})">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </div>
-        `).join('');
-    }
-}
-
-// Mostrar/ocultar carrito
-function toggleCart() {
-    cartSidebar.classList.toggle('open');
-    cartOverlay.classList.toggle('open');
-    document.body.style.overflow = cartSidebar.classList.contains('open') ? 'hidden' : 'auto';
-}
-
-function login(){
-    window.location.href = "login.html";
-}
-
-// Animación al agregar al carrito
-function showAddToCartAnimation() {
-    const cartBtn = document.querySelector('.cart-btn');
-    cartBtn.style.transform = 'scale(1.2)';
-    cartBtn.style.color = 'var(--primary-color)';
-    
-    setTimeout(() => {
-        cartBtn.style.transform = 'scale(1)';
-        cartBtn.style.color = '';
-    }, 200);
-}
-
-// Finalizar compra
-function checkout() {
-    if (cart.length === 0) {
-        Swal.fire({
-            icon: 'info',
-            title: 'Carrito vacío',
-            text: 'Tu carrito está vacío',
-            confirmButtonText: 'Entendido',
-            confirmButtonColor: 'var(--primary-color)'
-        });
-        return;
-    }
-    
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-    
-    Swal.fire({
-        icon: 'success',
-        title: '¡Gracias por tu pedido!',
-        html: `
-            <div style="text-align: left; margin: 1rem 0;">
-                <p><strong>Resumen:</strong></p>
-                <p>${itemCount} productos</p>
-                <p>Total: $${total.toFixed(2)}</p>
-            </div>
-            <p>En breve nos pondremos en contacto contigo para confirmar tu pedido.</p>
-        `,
-        confirmButtonText: '¡Genial!',
-        confirmButtonColor: 'var(--primary-color)'
-    }).then(() => {
-        // Vaciar carrito
-        cart = [];
-        updateCartUI();
-        toggleCart();
-    });
-}
-
-// Ir a la sección del menú
-function scrollToMenu() {
-    document.getElementById('menu').scrollIntoView({
-        behavior: 'smooth'
-    });
-}
-
-// Desplazamiento suave para los enlaces de navegación
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// Efecto de scroll en el encabezado
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('.header');
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(255, 255, 255, 0.95)';
-        header.style.backdropFilter = 'blur(10px)';
-    } else {
-        header.style.background = 'var(--white)';
-        header.style.backdropFilter = 'none';
-    }
-});
-
-// Animación de carga para los productos del menú
-function addLoadingAnimation() {
-    const menuItems = document.querySelectorAll('.menu-item');
-    menuItems.forEach((item, index) => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateY(20px)';
+    // Parallax effect for hero section
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallax = document.querySelector('.parallax');
+        const navbar = document.getElementById('navbar');
         
-        setTimeout(() => {
-            item.style.transition = 'all 0.5s ease';
-            item.style.opacity = '1';
-            item.style.transform = 'translateY(0)';
-        }, index * 100);
+        if (parallax) {
+            parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+        }
+        
+        // Navbar background change on scroll
+        if (scrolled > 100) {
+            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+        } else {
+            navbar.style.background = 'rgba(255, 255, 255, 0.1)';
+        }
     });
-}
 
-// Llamar animación de carga después de cargar el DOM
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(addLoadingAnimation, 100);
-});
+    // Counter animation
+    function animateCounter(element, target) {
+        let current = 0;
+        const increment = target / 100;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(current);
+        }, 20);
+    }
+
+    // Trigger counters when visible
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target.querySelector('.counter');
+                const target = parseInt(entry.target.dataset.target);
+                animateCounter(counter, target);
+                counterObserver.unobserve(entry.target);
+            }
+        });
+    });
+
+    document.querySelectorAll('.counter-item').forEach(item => {
+        counterObserver.observe(item);
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Enhanced form submission with loading state
+    document.getElementById('reservation-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const submitBtn = document.getElementById('submit-btn');
+        const originalText = submitBtn.innerHTML;
+        
+        // Loading state
+        submitBtn.innerHTML = `
+            <svg class="animate-spin w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Procesando...
+        `;
+        submitBtn.disabled = true;
+        
+        // Simulate API call
+        setTimeout(() => {
+            submitBtn.innerHTML = `
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                ¡Reserva Confirmada!
+            `;
+            submitBtn.classList.add('bg-green-500', 'hover:bg-green-600');
+            submitBtn.classList.remove('bg-elegant-gold', 'hover:bg-yellow-600');
+            
+            // Show success message
+            const successMessage = document.createElement('div');
+            successMessage.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+            successMessage.textContent = '¡Reserva confirmada! Te contactaremos pronto.';
+            document.body.appendChild(successMessage);
+            
+            setTimeout(() => {
+                successMessage.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                successMessage.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    document.body.removeChild(successMessage);
+                }, 300);
+            }, 3000);
+            
+            // Reset form after 2 seconds
+            setTimeout(() => {
+                this.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+                submitBtn.classList.add('bg-elegant-gold', 'hover:bg-yellow-600');
+            }, 2000);
+        }, 1500);
+    });
+
+    // Form field animations
+    document.querySelectorAll('.form-group input, .form-group select, .form-group textarea').forEach(field => {
+        field.addEventListener('focus', function() {
+            this.parentElement.classList.add('focused');
+        });
+        
+        field.addEventListener('blur', function() {
+            if (!this.value) {
+                this.parentElement.classList.remove('focused');
+            }
+        });
+    });
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function() {
+            // Mobile menu functionality can be added here
+            console.log('Mobile menu clicked');
+        });
+    }
+
+    // Add hover effects to navigation links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+        });
+        
+        link.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
